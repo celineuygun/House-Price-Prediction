@@ -181,18 +181,18 @@ House* sort_houses(House* houses, int criteria, int size, int order, int a, int 
     } 
     
     for(int i = 0; i < houses->size; ++i) {
-        if(criteria == 1 || criteria == 4) break; // If there is no need to sort the dataset again (already sorted by id)
+        if(criteria == 1) break; // If there is no need to sort the dataset again (already sorted by id)
         else if(criteria == 2) hash_index = houses[i].saleprice;
         else if(criteria == 3) hash_index = houses[i].lotarea;
-        else if(criteria == 5) hash_index = houses[i].overallqual;
-        else if(criteria == 6) hash_index = houses[i].overallcond;
-        else if(criteria == 7) {
+        else if(criteria == 4) hash_index = houses[i].overallqual;
+        else if(criteria == 5) hash_index = houses[i].overallcond;
+        else if(criteria == 6) {
             if(!strcmp(houses[i].kitchenqual, "Ex")) hash_index = 0;
             else if(!strcmp(houses[i].kitchenqual, "Gd")) hash_index = 1;
             else if(!strcmp(houses[i].kitchenqual, "TA")) hash_index = 2;
             else if(!strcmp(houses[i].kitchenqual, "Fa")) hash_index = 3;
             else if(!strcmp(houses[i].kitchenqual, "Po")) hash_index = 4;
-        } else if(criteria == 8) hash_index = houses[i].yearbuilt;
+        } else if(criteria == 7) hash_index = houses[i].yearbuilt;
         else if(criteria == 0) { // mean(overallqual + overallcond + kitchenqual)
             hash_index = houses[i].overallqual * a + houses[i].overallcond * b;
             if(!strcmp(houses[i].kitchenqual, "Gd")) hash_index += c;
@@ -223,7 +223,7 @@ House* sort_houses(House* houses, int criteria, int size, int order, int a, int 
             int m;
             if(order == 0) m = i;
             else m = size - i - 1;
-            if(criteria == 1 || criteria == 4) {
+            if(criteria == 1) {
                 fprintf(fp,"  %-10d %-14d %-12d %-12s %-12d %-11d %-10s %-12d %-12s\n", houses[m].id, houses[m].saleprice, houses[m].lotarea, houses[m].street, 
                                                 houses[m].overallqual, houses[m].overallcond, houses[m].kitchenqual, houses[m].yearbuilt, houses[m].neighborhood);
                 continue;

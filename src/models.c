@@ -29,7 +29,7 @@ float model_by_similarity(House* houses, House new_house, int m2, int year, int 
     
     free(sorted);
     tmp_mean = mean_sale_prices(similars);
-    sorted = sort_houses(similars, 8, YEAR_SIZE, 0, 0, 0, 0, 0);
+    sorted = sort_houses(similars, 7, YEAR_SIZE, 0, 0, 0, 0, 0);
     similars->size = 0;
     for(int i = 0, ind = 0; i < sorted->size; ++i) {
         if((sorted[i].yearbuilt <= new_house.yearbuilt + year) && (sorted[i].yearbuilt >= new_house.yearbuilt - year)) {
@@ -178,7 +178,7 @@ void get_multiplication(int Arow, int Apitch, const float A[],
 }
 
 /*
- * [(X^T * X)^-1] * X^T * Y = W
+ * (X^T x X)^-1 x X^T x Y = W
  */
 float *calculate_parameter(int n, int Xpitch, float X[], int Ypitch, float Y[]) {
     float *XT = calloc(Xpitch * n, sizeof(float)), *XT_X = calloc(Xpitch * Xpitch, sizeof(float)), *I = calloc(Xpitch * Xpitch, sizeof(float)), *XT_Y = calloc(Xpitch * Ypitch, sizeof(float));

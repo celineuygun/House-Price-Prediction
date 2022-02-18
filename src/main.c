@@ -5,7 +5,7 @@
 #include "models.h"
 
 // For price prediction by similarity
-// Overall Quality * A + Overall Cond * B + Kitchen Quality * C
+// Overall Quality * A + Overall Condition * B + Kitchen Quality * C
 #define A 4
 #define B 3
 #define C 2
@@ -98,37 +98,35 @@ int main(int argc, char* argv[]) {
         printf("1: ID\n");
         printf("2: Sale price\n");
         printf("3: Lot area\n");
-        printf("4: Street\n");
-        printf("5: Overall quality\n");
-        printf("6: Overall condition\n");
-        printf("7: Kitchen quality\n");
-        printf("8: Year built\n");
-        criteria = input("criteria", 1, 8);
+        printf("4: Overall quality\n");
+        printf("5: Overall condition\n");
+        printf("6: Kitchen quality\n");
+        printf("7: Year built\n");
+        criteria = input("criteria", 1, 7);
 
-        if(criteria == 7)
+        if(criteria == 6)
           order = input("order you want to sort, best to worst(0) or worst to best(1)", 0, 1);
-        else if(criteria == 5 || criteria == 6)
+        else if(criteria == 4 || criteria == 5)
           order = input("order you want to sort, worst to best(0) or best to worst(1)", 0, 1);
-        else if(criteria == 8)
+        else if(criteria == 7)
           order = input("order you want to sort, oldest to newest(0) or newest to oldest(1)", 0, 1);
         else if(criteria == 1 || criteria == 2 || criteria == 3)
           order = input("order you want to sort, lowest to highest(0) or highest to lowest(1)", 0, 1);
-        else criteria = 0;
       
         if(criteria == 2) size = PRICE_SIZE;
         else if(criteria == 3) size = LOT_SIZE;
-        else if(criteria == 5 || criteria == 6) size = OVERALL_SIZE;
-        else if(criteria == 7) size = KIT_TYPES;
-        else if(criteria == 8) size = YEAR_SIZE;
+        else if(criteria == 4 || criteria == 5) size = OVERALL_SIZE;
+        else if(criteria == 6) size = KIT_TYPES;
+        else if(criteria == 7) size = YEAR_SIZE;
 
         if(answer == 1) {
-          if(criteria == 1 || criteria == 4) size = NUM_HOUSE;
+          if(criteria == 1) size = NUM_HOUSE;
           sorted = sort_houses(houses, criteria, size, order, 0, 0, 0, 1);
         } else{
           id = input("id of the house whose neighborhood you want to sort.", ID_START, ID_END);
           house = get_house_by_id(houses, id);
           neighborhood = get_neighborhoods(houses, house);
-          if(criteria == 1 || criteria == 4) size = neighborhood->size;
+          if(criteria == 1) size = neighborhood->size;
           sorted = sort_houses(neighborhood, criteria, size, order, 0, 0, 0, 1);
         } break;
 
